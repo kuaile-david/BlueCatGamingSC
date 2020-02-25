@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: web-service
+  rabbitmq:
+    host: 192.168.64.140
+    port: 5672
+    username: admin
+    password: admin
+  datasource:
+    url: jdbc:mysql://localhost:3306/cwfkm?serverTimezone=GMT%2B8&characterEncoding=utf8
+    username: root
+    password: root
+  thymeleaf:
+    prefix: classpath:/templates/pages/
+    suffix: .html
+      
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    default-statement-timeout: 30
+  mapper-locations:
+  - classpath:/mapper/*/*.xml
+
+server:
+  port: 80
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 100
+  servlet:
+    context-path: /
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka  
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 
+        - refresh
+        - hystrix.stream
