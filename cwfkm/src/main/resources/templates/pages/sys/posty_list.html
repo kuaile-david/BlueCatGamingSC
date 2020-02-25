@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- bootstrap 4.3.1 -->
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jquery-3.2.1 -->
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<!-- popper-1.15.0 动态图-->
+<script
+	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<!-- bootstrap 4.3.1-->
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/posty_list.css">
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="listBox">
+				<!-- BoxHead -->
+				<div class="listBoxHead">
+					<h3 class="box-title">用户管理</h3>
+				</div>
+				<div class="listBoxBody">
+					<table class="table table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col" class="postyID">id</th>
+								<th scope="col" class="postyName">帖子</th>
+								<th scope="col" class="boardName">板块</th>
+								<th scope="col" class="createdTime">发帖时间</th>
+								<th scope="col" class="replyNum">回复数</th>
+								<th scope="col" class="isDelete">删除</th>
+							</tr>
+						</thead>
+						<tbody class="t_body">
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item" href="javascript:doPetObjects()"><a class="page-link" href="#">前一页</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							id="pageCurrent">0</a></li>
+						<li class="page-item"><a class="page-link"
+							href="javascript:doGetObjects()">下一页</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		$(".pagination").on(doGetObjects());
+	});
+	function doGetObjects() {
+		var url = "user/doFindPostyList";
+		var params = {
+			"pageCurrent" : ($("#pageCurrent").html() - 0)
+		};
+		$.getJSON(url, params, function(result) {
+			doHandleResponseResult(result);
+		});
+	}
+
+	function doHandleResponseResult(result) {
+		if (result.state == 1) {
+			console.log(result.data.records);
+			doSetTableBodyRows(result.data.records);
+			if (result.pageCurrent == null) {
+				result.pageCurrent = 0;
+			}
+			$("#pageCurrent").html(result.pageCurrent + 1);
+		} else {
+			alert(result.message);
+		}
+	}
+	function doPetObjects() {
+		var url = "user/doFindPostyList";
+		var params = {
+			"pageCurrent" : ($("#pageCurrent").html() - 0)
+		};
+		$.getJSON(url, params, function(result) {
+			doHResponseResult(result);
+		});
+	}
+
+	function doHResponseResult(result) {
+		if (result.state == 1) {
+			console.log(result.data.records);
+			doSetTableBodyRows(result.data.records);
+			if (result.pageCurrent == null) {
+				result.pageCurrent = 0;
+			}
+			$("#pageCurrent").html(result.pageCurrent - 1);
+		} else {
+			alert(result.message);
+		}
+	}
+
+	//通过服务端返回的数据初始化页面
+	function doSetTableBodyRows(data) {
+		console.log(data);
+		//1.获取tbody对象，并清空内容
+		var tBody = $(".t_body");
+		tBody.empty();
+		//2.迭代data内容将数据追加到tbody中
+		for ( var i in data) {
+			if (data[i].valid == 1) {
+				var tr = $("<tr></tr>");
+				tr.data("rowData", data[i]);
+				var tds = doCreateTds(data[i]);
+				tr.append(tds);
+				tBody.append(tr);
+			}
+		}
+	}
+
+	function doCreateTds(row) {
+		var tds = "<th>" + row.postyId + "</th>" + "<td>" + row.title + "</td>"
+				+ "<td>" + row.boardId + "</td>" + "<td>" + row.createdTime
+				+ "</td>" + "<td>" + row.replyNum + "</td>"
+				+ "<td class='btn text-left'>删除</td>";
+		return tds;
+	}
+</script>
+
+</html>

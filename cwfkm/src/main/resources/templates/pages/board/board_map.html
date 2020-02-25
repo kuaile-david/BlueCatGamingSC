@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="row" style="margin: 15px 0px 15px;">
+		<div id="doStarterUI" class="btn btn-info pull_left shadow p-3 mb-5 rounded"
+			style="margin-left: 20px;">BGA</div>
+		<span style="margin-top: 17px;">&emsp;>>&emsp;</span>
+		<div id="doBoard" class="btn btn-info pull_left shadow p-3 mb-5 rounded active">论坛</div>
+		<p></p>
+	</div>
+	<div class="boardBox container shadow p-3 mb-5 bg-white rounded"
+		th:each="key : ${map.keySet()}"
+		style="text-align: left; margin-top: 8px;">
+		<div class="boardTitle">
+			<h4
+				style="text-align: left; background-color: #f8e5c5; padding: 22px 55px;">[[${key}]]</h4>
+		</div>
+		<div class="col-md-4 card shadow-sm p-3 mb-5 bg-white rounded"
+			th:id="${item.id}"
+			style="display: inline-block; width: 200px; height: 200px;"
+			th:each="item : ${map.get(key)}">
+			<div class="text-center" style="overflow: hidden;">
+				<img class="card-img-top rounded" alt="150x300"
+					th:src="@{./image/{name}.jpg(name=${item.name})}"
+					style="width: auto;height: 150px;" />
+			</div>
+			<div style="margin: 7px;">
+				<span class="card-text text-nowrap ">[[${item.name}]]</span>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$(".boardBox .card").on(
+					"click",
+					function() {
+						$("#MAIN_INDEX").load(
+								"board/doBoardUI?id=" + $(this).prop("id")
+										+ "&pageCurrent=1");
+					})
+		})
+	</script>
+</body>
+</html>

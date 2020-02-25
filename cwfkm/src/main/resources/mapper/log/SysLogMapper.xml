@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwfkm.dao.SysLogDao">
+	<insert id="insertObject">
+		insert into sys_logs 
+		(username,operation,method,params,time,ip,createdTime)
+		values
+		(#{username},#{operation},#{method},#{params},#{time},#{ip},#{createdTime})
+	</insert>
+
+	<!-- 基于日志执行删除业务:从可靠性,性能等方法对 如下写法进行分析,检测是否有可优化的地方. -->
+	<!-- <delete id="deleteObjects"> delete from sys_logs where id in <foreach 
+		collection="ids" open="(" close=")" separator="," item="id"> #{id} </foreach> 
+		</delete> -->
+	<!-- 可靠性实践 -->
+	<!-- <delete id="deleteObjects"> delete from sys_logs <if test="ids==null 
+		|| ids.length==0"> where id=-1 </if> <if test="ids!=null and ids.length>0"> 
+		where id in <foreach collection="ids" open="(" close=")" separator="," item="id"> 
+		#{id} </foreach> </if> </delete> -->
+	<!-- <delete id="deleteObjects"> delete from sys_logs where 1=2 <if test="ids!=null 
+		and ids.length>0"> or id in <foreach collection="ids" open="(" close=")" 
+		separator="," item="id"> #{id} </foreach> </if> </delete> -->
+	<!-- SQL语句编写时,尽量不要使用in或not in 语句 -->
+	<delete id="deleteObjects">
+		delete from sys_logs
+		<where>
+			<choose>
+				<when test="ids!=null and ids.length>0">
+					<foreach collection="ids" separator="or" item="id">
+						id=#{id}
+					</foreach>
+				</when>
+				<otherwise>
+					id=-1
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
+
+	<!-- 通过sql元素对sql映射中的共性进行提取 -->
+	<sql id="queryWhereId">
+		from sys_logs
+		<where>
+			<if test="username!=null and username!=''">
+				username like concat("%",#{username},"%")
+			</if>
+		</where>
+	</sql>
+	<!-- 基于条件统计日志记录总数 -->
+	<!-- 基于条件进行分页查询 -->
+	<select id="findPageObjects"
+		resultType="com.cwfkm.pojo.SysLog">
+		select *
+		<include refid="queryWhereId" />
+		order by createdTime desc
+	</select>
+</mapper>
+
+
+
+
+
+

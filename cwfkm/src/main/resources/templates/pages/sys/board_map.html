@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="boardBox container shadow p-3 mb-5 bg-white rounded parents"
+		th:each="key : ${map.keySet()}" th:id="BOARD_NO.${key}"
+		style="text-align: left; margin-top: 8px;">
+		<div class="boardTitle">
+			<h4
+				style="text-align: left; background-color: #f8e5c5; padding: 22px 55px;">[[${key}]]</h4>
+		</div>
+		<div class="col-md-2 card shadow-sm p-3 mb-5 bg-white rounded child"
+			th:id="BOARD_NO.+${item.id}" style="display: inline-block;"
+			th:each="item : ${map.get(key)}">
+			<div style="margin: 7px;">
+				<span class="card-text">[[${item.name}]]</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

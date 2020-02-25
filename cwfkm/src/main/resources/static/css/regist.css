@@ -1,0 +1,139 @@
+@charset "UTF-8";
+body{
+	font-size:12px;
+	font-family:"微软雅黑";
+}
+
+/*头部*/
+#header{
+	width:1200px;
+	height:114px;
+	/*background:pink;*/
+	margin:0px auto;
+	margin-top:41px;
+}
+#header #line1{/*1.头部第一行*/
+	height:72px;
+
+}
+#header #line1 img{/*1.1logo图片*/
+	margin-left:50px;
+	margin-right:33px;
+	vertical-align:middle;
+}
+#header #line1 .line{/*1.2竖线*/
+	border:2px solid #676767;
+	height:68px;
+	display:inline-block;
+	vertical-align:middle;
+}
+#header #line1 .wel-reg{/*1.3欢迎注册*/
+	font-size:36px;
+	color:#676767;
+	margin-left:23px;
+	vertical-align:middle;/*设置同行内垂直居中*/
+}
+#header #line2{/*1.5第二行*/
+	height:42px;
+	text-align:right; 
+}
+#header #line2 span{/*1.6账号*/
+	font-size:24px;
+	color:#999;
+}
+#header #line2 span a{/*1.7超链接*/
+	color:#222;
+	text-decoration:none;/*underline*/
+}
+
+	
+
+/*主体*/
+#middle{
+	width:1200px;
+	height:600px;
+	/* background:yellow; */
+	margin:0px auto;
+	border:7px solid #f0f0f0;
+	border-weight:9px 7px;
+	padding-top:75px;
+}
+#middle form{
+	width:819px;
+	margin-left:55px;
+	/* height:540px; */
+	/*background:pink;*/
+	/*设置from为行内块元素,可以同行显示*/
+	display:inline-block;
+	
+}
+#middle img{
+	/*当前元素与行内最高元素对齐*/
+	vertical-align:top;
+}
+#middle form table tr td input{
+	width:381px;
+	height:50px;
+	color:#999;
+	font-size:16px;
+	text-indent:45px;
+	border:1px solid #dbdbdb;
+}
+#middle form table tr td input[name='user']{/*用户名输入框*/
+	background:url("image/u_ico.jpg")no-repeat 15px 15px;/*左 上*/
+	/*no-repeat不重复  repeat-x 横向重复 repeat-y 纵向重复 repeat重复*/
+}
+#middle form table tr td.msg{/*匹配class为msg的td元素*/
+	font-size:12px;
+	color:#c3c3c3;
+	text-indent:45px;
+	background:url("image/alert_1.jpg") no-repeat 17px 7px;
+	height:32px;	
+}
+#middle form table tr td input[name="pwd"],
+#middle form table tr td input[name="repwd"]{
+	background:url("image/p_ico.jpg") no-repeat 15px 15px;
+}
+#middle form table tr td.alert{
+	background-image:url("image/alert_2.jpg");
+	color:#E64346
+}
+#middle form table tr td input[name="phone"]{
+	background:url("image/phone_ico.jpg") no-repeat 15px 15px;
+}
+#middle form table tr td span.ck-email{
+	font-size:16px;
+}
+#middle form table tr td span a {
+	color:#005ea7;
+	text-decoration:none;
+}
+#middle form table tr td.protocol {
+	font-size:16px;
+	line-height:52px;
+	text-indent:60px;
+	height:83px;
+	
+}
+#middle form table tr td.protocol a{
+	color:#005ea7;
+	text-decoration:none;
+	 
+}
+
+
+/*尾部*/
+#footer{
+	width:1200px;
+	height:100px;
+	/*background:cyan;*/
+	margin:0px auto;
+	margin-top:109px;
+}
+#footer p{
+	text-align:center;
+	font-size:14px;
+	color:#999;
+	line-height:34px;
+	
+}

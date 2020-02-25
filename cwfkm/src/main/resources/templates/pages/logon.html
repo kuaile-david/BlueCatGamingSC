@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8">
+<!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+<title>Register form, html bootstrap4 registration form card
+	panel - Bootsnipp.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<style type="text/css">
+.divider-text {
+	position: relative;
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.divider-text span {
+	padding: 7px;
+	font-size: 12px;
+	position: relative;
+	z-index: 2;
+}
+
+.divider-text:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	top: 55%;
+	left: 0;
+	z-index: 1;
+}
+
+.card-title {
+	color: royalblue;
+	font-size: 40px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.btn-facebook {
+	background-color: #405D9D;
+	color: #fff;
+}
+
+.btn-twitter {
+	background-color: #42AEEC;
+	color: #fff;
+}
+
+#text {
+	text-align: center;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<div class="container">
+		<div class="card bg-light" id="logoncard">
+			<article class="card-body mx-auto" style="max-width: 400px;">
+				<h4 class="card-title">注册账户</h4>
+				<p id="text">
+					<a href="#"> <img src="image/icon_QQ.png" style="width: 25px;">&nbsp;
+						QQ
+					</a>&nbsp;&nbsp;&nbsp; <a href="#"><img src="image/微信.png"
+						style="width: 25px;">&nbsp; WeChat</a>
+				</p>
+
+				<form>
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-user"></i>
+							</span>
+						</div>
+						<input name="username" class="form-control" placeholder="用户名" type="text"
+							id="usernameID">
+					</div>
+					<!-- form-group// -->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-envelope"></i>
+							</span>
+						</div>
+						<input name="email" class="form-control" placeholder="邮箱地址"
+							type="email" id="emailID">
+					</div>
+					<!-- form-group// -->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-phone"></i>
+							</span>
+						</div>
+						<select class="custom-select" style="max-width: 120px;" id="preMobileID">
+							<option value="+86" selected="">+86</option>
+							<option value="+972">+972</option>
+							<option value="+198">+198</option>
+							<option value="+701">+701</option>
+						</select> <input name="mobile" class="form-control" placeholder="手机号码"
+							type="text" id="mobileID">
+					</div>
+					<!-- form-group// -->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-building"></i>
+							</span>
+						</div>
+						<select class="form-control" id="sexID">
+							<option value="0" selected="">性别</option>
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+					</div>
+					<!-- form-group end.// -->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-lock"></i>
+							</span>
+						</div>
+						<input class="form-control" placeholder="密码" type="password"
+							id="passwordID">
+					</div>
+					<!-- form-group// -->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"> <i class="fa fa-lock"></i>
+							</span>
+						</div>
+						<input class="form-control" placeholder="确认密码" type="password"
+							id="newPasswordID">
+					</div>
+					<!-- form-group// -->
+					<div class="form-group">
+						<button type="button" class="btn btn-primary btn-block"
+							id="logonID" disabled="true">注册</button>
+					</div>
+					<!-- form-group// -->
+					<p class="text-center">
+						Have an account? <a href="./doLoginUI">登录</a>
+					</p>
+			<div class="msg"><div>
+				</form>
+			</article>
+		</div>
+		<!-- card.// -->
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		$("#logonID").click(doLogon);
+		$("#logoncard")
+		 .on("blur","#usernameID,#emailID,#mobileID",isExists);
+		
+		
+	})
+	/* 键盘监听事件 */
+   	document.onkeyup=function(event){ 
+		var params = doGetEditFormData();
+		var newpwd = $("#newPasswordID").val();
+		for ( var i in params) {
+			if(params.password!=newpwd){
+				$("#logonID").html("两次密码不一致");
+				$("#logonID").attr("disabled", true);
+			}else if(params[i] == ""|| newpwd=="" || params.sex==0){
+				$("#logonID").html("请输入完整信息");
+				$("#logonID").attr("disabled", true);
+			}else{
+				$("#logonID").html("注册");
+				$("#logonID").attr("disabled", false);
+			}
+		}
+	}
+	
+	/* 注册提交 */
+	function doLogon() {
+		var params = doGetEditFormData();
+		var url = "/user/doSaveObject"
+		$.getJSON(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				window.location.href="doLoginUI?t="+Math.random();
+			} else {
+				alert(result.message);
+			}
+		})
+	}
+	/* 获取表单信息 */
+	function doGetEditFormData() {
+		//获取用户输入的数据
+		var params = {
+			username : $("#usernameID").val(),
+			password : $("#passwordID").val(),
+			email : $("#emailID").val(),
+			mobile : $("#preMobileID").val() + $("#mobileID").val(),
+			sex : $("#sexID").val()
+		}
+		return params;
+	}
+
+	/* 判断是否存在 */
+	function isExists() {
+		var columnName = $(this).prop("name");
+		var columnValue = $(this).val();
+		var params = {
+			"columnName" : columnName,
+			"columnValue" : columnValue
+		};
+		var url = "user/isExists";
+		$.getJSON(url, params, function(result) {
+			if (result.data > 0) {
+				alert(columnValue + "已存在");
+			}
+		})
+	}
+</script>

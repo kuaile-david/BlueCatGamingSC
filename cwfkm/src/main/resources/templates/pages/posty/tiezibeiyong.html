@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- bootstrap 4.3.1 -->
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jquery-3.2.1 -->
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<!-- popper-1.15.0 动态图-->
+<script
+	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<!-- bootstrap 4.3.1-->
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>[[${pageObject.postyTitle}]]</h1>
+	<div class="card col-md-3">
+		<img src="..." class="card-img-top rounded-top" alt="..."style="width: 100px;height: 200px;">
+		<div class="card-body">
+			<a href="#" class="badge badge-light">[[${userID}]]</a>
+			<p class="card-text h3">[[${pageObject.username}]]</p>
+		</div>
+	</div>
+	</div>
+	<div id="postyID">[[${pageObject.id}]]</div>
+	<hr>
+	<div id="userPostyNumID">[[${pageObject.postyNum}]]</div>
+	<hr>
+	<div id="userReplyNumID">[[${pageObject.replyNum}]]</div>
+	<hr>
+	<div id="titleID">[[${pageObject.postyTitle}]]</div>
+	<hr>
+	<div id="contextID">[[${pageObject.postyContent}]]</div>
+</body>
+</html>

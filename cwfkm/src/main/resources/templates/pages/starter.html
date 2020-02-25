@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- bootstrap 4.3.1 -->
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jquery-3.2.1 -->
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<!-- popper-1.15.0 动态图-->
+<script
+	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<!-- bootstrap 4.3.1-->
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../jquery.qrcode.min.js"></script>
+<script src="../fonter.js"></script>
+<style type="text/css">
+@media ( min-width : 992px) {
+	body {
+		background: url("../image/poster/bg.jpg") repeat #f8f8f8;
+		background-color: #f8e5c5;
+	}
+	span {
+		cursor: default;
+	}
+	#HECC_LOGO_IN_HEADDER {
+		height: 60px;
+	}
+	#TO_INDEX_PAGE, #TO_BOARD_MAP_BUTTON {
+		font-size: 15px;
+	}
+	#PAGE_HEADDER {
+		background-color: #31393c;
+		color: #f46f60;
+		height: 60px;
+	}
+	#PERSONAL_BUTTOM {
+		background-color: #31393c;
+		border: none;
+	}
+	#PERSONNAL_SINGLE_PIC {
+		margin: 5px 0px 0px;
+		width: 50px;
+		height: 50px;
+	}
+	#PAGE_TODO_MENU {
+		background-color: #455257;
+		font-family: SourceHanSansCN-Medium;
+		font-size: 20px;
+		margin-top: 0px;
+	}
+	.nav-item {
+		color: #f8e5c5;
+	}
+	#PAGE_TAILLER_LINE {
+		display: inline-block;
+		height: 180px;
+		border: 1px white solid;
+		margin-top: 22px;
+	}
+	#PAGE_TAILLER {
+		background: url("https://www.3dmgame.com/index//images/header_bg.jpg")
+			repeat;
+		color:;
+		height: 200px;
+		font-size: 20px;
+	}
+	#PAGE_MIDDLE {
+		
+	}
+	#toManag {
+		padding-top: 13px;
+		padding-left: 8px;
+		margin-left: 10px;
+		margin-right: 20px;
+	}
+}
+</style>
+</head>
+<body>
+<body>
+	<!-- 页眉 -->
+	<div id="PAGE_HEADDER" class="col-md-13 row">
+		<div class="col-md-1"></div>
+		<div class="col-md-5">
+			<img id="HECC_LOGO_IN_HEADDER" src="../image/cwfkmlogo.png">
+		</div>
+		<div class="col-md-3"></div>
+		<div class="col-md-3 row">
+			<a id="PERSONAL_BUTTOM" href="doSysIndex"><img
+				id="PERSONNAL_SINGLE_PIC"
+				src="https://i04piccdn.sogoucdn.com/f7b5ba15a7109783"
+				class="rounded-circle"> </a>
+			<div id="toManag">
+				<a href="/" class="text-white" style="text-decoration: none;"
+					th:text="${username}"></a>&emsp;<a href="doSysIndex" class="btn btn-outline-info">个人中心</a>
+			</div>
+		</div>
+	</div>
+	<!-- 导航 -->
+	<div id="PAGE_TODO_MENU" class="container-md">
+		<nav id="nav_1" class="nav nav-pills nav-fill">
+			<a href="#" id="TO_INDEX_PAGE" class="nav-item nav-link">- 首页 -</a> <a
+				href="#" id="TO_BOARD_MAP_BUTTON" class="nav-item nav-link" value="">
+				- 论坛 -</a>
+			<form class="nav-item nav-link form-inline my-2 my-lg-0">
+				<input id="SEARCH_STRING" class="form-control mr-sm-2" type="search"
+					placeholder="精品搜索" aria-label="全站搜索" style="height: 25px">
+				<button id="TO_SEARCH_PAGE"
+					class="btn btn-outline-success my-2 my-sm-0" type="button"
+					style="height: 25px; font-size: 13px; padding-top: 1px;">Search</button>
+			</form>
+		</nav>
+	</div>
+	<!-- 中间部分 -->
+	<div id="MAIN_INDEX" class=" container-fluid  text-center"
+		style="height: 400px; height: auto; min-height: 500px;">
+		<div class="spinner-border text-dark" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+	<!-- 页尾部分 -->
+	<div id="PAGE_TAILLER" class="container-fluid"
+		style="text-align: center;">
+		<table
+			style="display: inline-block; vertical-align: top; text-align: left;">
+			<thead style="font-size: 20px;">
+				<tr>
+					<td style="padding: 22px 105px 19px 0px;">关于我们</td>
+					<td style="padding: 22px 105px 19px 0px;">关于我们</td>
+					<td style="padding: 22px 54px 19px 0px;">关于我们</td>
+				</tr>
+			</thead>
+			<tbody style="font-size: 18px;">
+				<tr>
+					<td style="padding: 19px 0px;">组织</td>
+					<td>组织</td>
+					<td>组织</td>
+				</tr>
+				<tr>
+					<td style="padding: 19px 0px;">开发人员</td>
+					<td>开发人员</td>
+					<td>开发人员</td>
+				</tr>
+			</tbody>
+		</table>
+		<table
+			style="display: inline-block; vertical-align: top; text-align: left;">
+			<tbody>
+				<tr>
+					<td style="padding: 22px 10px; font-size: 20px;">联系我们：</td>
+				</tr>
+				<tr>
+					<td style="padding: 0px 0px 0px 10px; font-size: 20px;">400-1234-1234</td>
+				</tr>
+				<tr>
+					<td style="padding: 0px 10px; font-size: 20px;">400-1234-1234</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<img src="./image/cwfkmlogo.png" width="200px" border="200px";><br>
+		</div>
+
+
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			doLoadUI("TO_BOARD_MAP_BUTTON", "board/doBoardMenu");
+			doLoadUI("TO_INDEX_PAGE", "doIndex");
+			doLoadUI("toManag", "doSysIndex");
+			$("#MAIN_INDEX").load("doIndex");
+		})
+		function doLoadUI(id, url) {
+			$("#" + id).click(function() {//事件处理函数(回调)
+				//在mainContentId位置,异步请求url对应的资源
+				//服务端响应的数据会插入到mainContentId对应的位置
+				//其中:load函数为jquery中的一个ajax函数
+				$("#MAIN_INDEX").load(url);
+			});
+		}
+		$("#TO_SEARCH_PAGE").click(
+				function() {
+					$("#MAIN_INDEX").load(
+							"board/doSearch?like=" + $("#SEARCH_STRING").val()
+									+ "&pageCurrent=1");
+				});
+	</script>
+</body>
+
+</html>

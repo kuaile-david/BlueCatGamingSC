@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- bootstrap 4.3.1 -->
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jquery-3.2.1 -->
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<!-- popper-1.15.0 动态图-->
+<script
+	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<!-- bootstrap 4.3.1-->
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../jquery.qrcode.min.js"></script>
+<script src="../fonter.js"></script>
+<style type="text/css">
+body {
+	background-color: #f3f3f3;
+}
+
+span {
+	cursor: default;
+}
+
+#HECC_LOGO_IN_HEADDER {
+	height: 100px;
+}
+
+#PAGE_HEADDER {
+	background-color: #31393c;
+	color: #f46f60;
+	height: 100px;
+}
+
+#PERSONAL_BUTTOM {
+	background-color: #31393c;
+	border: none;
+}
+
+#PERSONNAL_SINGLE_PIC {
+	margin: 25px 0px 0px;
+	width: 50px;
+	height: 50px;
+}
+
+.nav-item {
+	color: #f8e5c5;
+}
+
+#PERSONNAL_SINGLE_PIC {
+	margin: 25px 0px 0px;
+	width: 50px;
+	height: 50px;
+}
+
+#PAGE_TAILLER_LINE {
+	display: inline-block;
+	height: 180px;
+	border: 1px white solid;
+	margin-top: 22px;
+}
+
+#PAGE_TAILLER {
+	background: url("https://www.3dmgame.com/index//images/header_bg.jpg")
+		repeat;
+	color:;
+	height: 200px;
+	font-size: 20px;
+}
+
+#PAGE_MIDDLE {
+	
+}
+
+#MENUS {
+	width: 200px;
+	height: 690px;
+	background-color: #F2EFE6;
+	margin: 22px;
+}
+
+button[aria-controls="collapseExample"] btn btn-link {
+	background-color: #c3c3c3;
+}
+
+#mainContentId {
+	height: 400px;
+	height: auto;
+	min-height: 500px;
+	height: 400px;
+	height: auto;
+	min-height: 500px;
+	margin-left: 60px;
+	margin-top: 20px;
+	min-height: 500px;
+	height: 400px;
+	height: auto;
+}
+</style>
+</head>
+<body>
+	<!-- 页眉 -->
+	<div id="PAGE_HEADDER" class="col-md-13 row">
+		<div class="col-md-1"></div>
+		<div class="col-md-5">
+			<img id="HECC_LOGO_IN_HEADDER" src="../image/cwfkmlogo.png">
+		</div>
+		<div class="col-md-3"></div>
+		<div class="col-md-3 row">
+			<a id="PERSONAL_BUTTOM" href="/"><img id="PERSONNAL_SINGLE_PIC"
+				src="https://i04piccdn.sogoucdn.com/f7b5ba15a7109783"
+				class="rounded-circle"> </a>
+			<div style="padding-top: 33px; padding-left: 8px;">
+				<a href="/" class="text-white btn btn-outline-primary"
+					style="text-decoration: none;">回到首页</a>&emsp; <a href="./doLogout"
+					class="text-white btn btn-danger" style="text-decoration: none;">退出登录</a>
+			</div>
+		</div>
+	</div>
+	<!-- 中间部分 -->
+	<div class=" container-fluid row">
+		<!-- 侧面菜单 -->
+		<div id="MENUS" class=" shadow-lg p-3 mb-5 rounded">
+			<div>
+				<div class="text-center bg-dark text-white" data-toggle="collapse"
+					data-target="#m1" aria-expanded="false"
+					style="padding: 12px 0px; cursor: pointer;"
+					aria-controls="collapseExample">用户管理</div>
+				<div class="collapse container-fluid" id="m1">
+					<div id="load-myPerson-id" class="text-dark text-center"
+						style="cursor: pointer; padding: 12px 0px;">个人信息</div>
+					<div id="load-myPassword-id" class="text-dark text-center"
+						style="cursor: pointer; padding: 12px 0px;">修改密码</div>
+					<div id="load-myPosty-id" class="text-dark text-center"
+						style="cursor: pointer; padding: 12px 0px;">我的帖子</div>
+				</div>
+				<div class="text-center bg-dark text-white" data-toggle="collapse"
+					data-target="#m2" aria-expanded="false"
+					style="padding: 12px 0px; cursor: pointer;"
+					aria-controls="collapseExample">系统管理</div>
+				<div class="collapse container-fluid" id="m2">
+					<div id="load-boardUI" class="text-dark text-center"
+						style="cursor: pointer; padding: 12px 0px;">论坛管理</div>
+					<!-- <div id="" class="btn btn-light" style="cursor:pointer;">权限管理</div> -->
+					<div id="load-users-list" class="text-dark text-center"
+						style="cursor: pointer; padding: 12px 0px;">用户管理</div>
+					<div id="load-log-id" class="text-dark text-center"
+						style="cursor: pointer; padding: 12px 0px;">日志管理</div>
+				</div>
+				<div class="text-center bg-dark White link"
+					style="padding: 12px 0px;">
+					<a href="/" class="text-white" style="text-decoration: none;">回到首页</a>
+				</div>
+			</div>
+		</div>
+		<div id="mainContentId" class="col-md-8"></div>
+	</div>
+	</div>
+	<!-- 页尾部分 -->
+	<div id="PAGE_TAILLER" class="container-fluid"
+		style="text-align: center;">
+		<table
+			style="display: inline-block; vertical-align: top; text-align: left;">
+			<thead style="font-size: 20px;">
+				<tr>
+					<td style="padding: 22px 105px 19px 0px;">关于我们</td>
+					<td style="padding: 22px 105px 19px 0px;">关于我们</td>
+					<td style="padding: 22px 54px 19px 0px;">关于我们</td>
+				</tr>
+			</thead>
+			<tbody style="font-size: 18px;">
+				<tr>
+					<td style="padding: 19px 0px;">组织</td>
+					<td>组织</td>
+					<td>组织</td>
+				</tr>
+				<tr>
+					<td style="padding: 19px 0px;">开发人员</td>
+					<td>开发人员</td>
+					<td>开发人员</td>
+				</tr>
+			</tbody>
+		</table>
+		<table
+			style="display: inline-block; vertical-align: top; text-align: left;">
+			<tbody>
+				<tr>
+					<td style="padding: 22px 10px; font-size: 20px;">联系我们：</td>
+				</tr>
+				<tr>
+					<td style="padding: 0px 0px 0px 10px; font-size: 20px;">400-1234-1234</td>
+				</tr>
+				<tr>
+					<td style="padding: 0px 10px; font-size: 20px;">400-1234-1234</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+			<img src="./image/cwfkmlogo.png" width="200px" border="200px";><br>
+		</div>
+
+
+	</div>
+
+	<script src="dist/js/adminlte.min.js"></script>
+	<script type="text/javascript">
+		//页面加载完成事件
+		$(function() {
+			$("#mainContentId").load("person/person_list");
+			doLoadUI("load-myPerson-id", "person/person_list");
+			doLoadUI("load-myPassword-id", "person/password_update");
+			doLoadUI("load-myPosty-id", "person/posty_list");
+			doLoadUI("load-log-id", "sys/log_list");
+			doLoadUI("load-users-list", "sys/user_list");
+			doLoadUI("load-boardUI", "sys/doBoardMenu");
+
+		})
+		//基于某个对象click事件,执行资源加载操作
+		function doLoadUI(id, url) {
+			$("#" + id).click(function() {
+				//mainContentId为呈现页面的一个位置
+				//load函数为jquery中的一个ajax函数
+				//load函数用于在某个位置异步加载某个资源
+				$("#mainContentId").load(url);
+			})
+		}
+	</script>
+</body>
+</html>

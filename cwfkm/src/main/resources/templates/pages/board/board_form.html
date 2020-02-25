@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="posty/lib/css/bootstrap.css" />
+<link rel="stylesheet"
+	href="posty/lib/css/jquery.mCustomScrollbar.min.css" />
+<link rel="stylesheet" href="posty/dist/css/jquery.emoji.css" />
+<link rel="stylesheet" href="posty/lib/css/railscasts.css" />
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+	<form action="" method="post">
+		<div class="container">
+			<div>
+				<p class="h3 text-center ">发表帖子</p>
+				<hr />
+				<input class="form-control" type="text" name="title"
+					placeholder="标题 Title" style="margin-bottom: 10px;"> <input
+					class="form-control col-md-3" type="text" disabled="disabled"
+					name="boardName" th:value="${boardName}"
+					style="margin-bottom: 10px;" /> <input hidden="true" type="text"
+					name="boardId" th:value="${boardId}" />
+				<div id="doContIndex" class="form-group">
+					<textarea class="form-control container-fluid" id="content" name="content" 
+						rows="20"></textarea>
+				</div>
+			</div>
+			<form id="doPostSave" action="doPostSave" method="POST"
+				enctype="multipart/form-data" class="text-left">
+				<input id="files" type="file" name="img" accept=".jpg,.png,.jepg">
+				<div class="text-left">
+					<input id="doPostImg" class="btn btn-info" type="button" value="上传">
+				</div>
+			</form>
+			<div>
+				<input id="doPostContent" class="btn btn-info" type="button"
+					value="发表帖子"
+					style="margin-left: 90%; margin-top: 20px; margin-bottom: 10px;">
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		$("#doPostImg").click(function() {
+			var context = $("textarea");
+			var file = document.getElementById("files").files[0];
+			console.log(file);
+			var formData = new FormData();
+			formData.append("img", file);
+			$.ajax({
+				type : 'POST',
+				url : 'posty/doPostSave',
+				data : formData,
+				cache : false,
+				contentType : false,
+				processData : false,
+				success : function(data) {
+					var s = data.message;
+					var val = context.val();
+					var img = "<img src='./upLoadImg/"+s+"' style='margin:auto;'>"
+					//var img = "[img=>" + s + "=]";
+					alert("上传成功");
+					context.val(val + img);
+				}
+			});
+		});
+		$("#doPostContent").click(function() {
+			var title = $("input[name='title']").val();
+			var boardId = $("input[name='boardId']").val();
+			var content = $("textarea[name='content']").val();
+			var params={
+					'title':title,
+					'boardId':boardId,
+					'content':content
+			};
+			$.post("posty/doInsertPosty",params,function(result){
+				if(result.state == 1){
+					alert(result.message);
+					window.location.href="/";
+				}
+				else{
+					alert("你的贴子可能已经丢失(꒦_꒦) ");
+				}
+			});
+		});
+		$(document).keydown(function(event){
+			if(event.keyCode == 13){
+				var context = $("textarea");
+				var val = context.val();
+				context.val(val + '<br/>');
+			}
+			if(event.keyCode == 9){
+				var context = $("textarea");
+				var val = context.val();
+				context.val(val + '<spqn>&emsp;</span>');
+			}
+		});
+	</script>
+	<script type="text/javascript">
+	</script>
+</body>
+</html>

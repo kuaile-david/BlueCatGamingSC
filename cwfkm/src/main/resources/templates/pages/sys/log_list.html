@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jquery-3.2.1 -->
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<!-- popper-1.15.0 动态图-->
+<script
+	src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<!-- bootstrap 4.3.1-->
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../css/log_list.css">
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.l{
+ 	 display: inline-block;
+	 max-width: 300px;
+	 min-width: 230px;
+	 vertical-align: top;
+}
+</style>
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="">
+				<!-- BoxHead -->
+				<div class="listBoxHead">
+					<h3 class="box-title">日志管理</h3>
+					<div class="box-tools">
+						<div class="input-group input-group-sm" style="width: 350px;">
+							<input type="text" name="table_search" id="searchNameId"
+								class="form-control pull-right" placeholder="用户名">
+
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default btn-search">
+									<i class="fa fa-search"></i>
+								</button>
+								<button type="button" class="btn btn-default btn-delete">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="listBoxBody">
+					<table class="table table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th><input type="checkbox" id="checkAll">全选</th>
+								<th> 用户名</th>
+								<th>操作</th>
+								<th>请求方法</th>
+								<th>请求参数</th>
+								<th>IP</th>
+								<th>执行时长</th>
+							</tr>
+						</thead>
+						<tbody class="t_body">
+							<tr>
+								<th>1</th>
+								<td>震惊！陈亚军喜欢老母猪！！</td>
+								<td>震惊区</td>
+								<td>2019-12-12</td>
+								<td class="btn text-left" href="/?id=1">删除</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" id="first">首页</a></li>
+						<li class="page-item"><a class="page-link" id="pre">上一页</a></li>
+						<li class="page-item"><a class="page-link" id="next">下一页</a></li>
+						<li class="page-item"><a class="page-link" id="last">尾页</a></li>
+						<li class="page-item"><a class="page-link" id="pageCurrent">当前页</a></li>
+						<li class="page-item"><a class="page-link" id="rowCount">总记录数</a></li>
+						<li class="page-item"><a class="page-link" id="pageCount">总页数</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		$(".pagination").on(doGetObjects());
+		//在input-group-btn容器对象上注册点击事件
+		$(".input-group-btn").on("click", ".btn-search", doQueryObjects).on(
+				"click", ".btn-delete", doDeleteObjects);
+		$(".pagination").on("click", "#first,#pre,#next,#last", doJumpToPage);
+		//全选按钮事件注册
+		$("#checkAll").change(doChangeTBodyCheckBoxState);
+		//tbody中checkbox对象事件注册
+		$(".t_body").on("change", ".cBox", doChangeTHeadCheckBoxState)
+	});
+
+	//修改tHead中checkbox对象的状态
+	function doChangeTHeadCheckBoxState() {
+		//1.定义状态初始值.
+		var flag = true;
+		//2.迭代tbody中所有checkbox对象,并将其
+		//对象的状态值与flag变量进行逻辑与操作.
+		$(".t_body input[type='checkbox']").each(function() {
+			flag = flag && $(this).prop("checked");
+		})
+		//3.修改thead中checkbox对象状态
+		$("#checkAll").prop("checked", flag);
+	}
+
+	//修改tbody中checkbox对象的状态
+	function doChangeTBodyCheckBoxState() {
+		//1.获得全选对象的状态值
+		var flag = $(this).prop("checked");
+		//2.修改tbody中checkbox对象状态
+		$(".t_body input[type='checkbox']").prop("checked", flag);
+	}
+
+	//处理分页点击事件
+	function doJumpToPage() {
+		//1.获得点击对象的class属性值.
+		//prop为一个jquery函数
+		//其语法为prop(属性名[,属性值])
+		var id = $(this).prop("id");
+		//2.基于class属性值修改当前页码值.
+		//2.1获取当前页码值,总页数
+		var pageCurrent = $(".pagination").data("pageCurrent");
+		var pageCount = $(".pagination").data("pageCount");
+		//2.2修改当前页码
+		if (id == "first") {
+			pageCurrent = 1;
+		} else if (id == "pre" && pageCurrent > 1) {
+			pageCurrent--;
+		} else if (id == "next" && pageCurrent < pageCount) {
+			pageCurrent++;
+		} else if (id == "last") {
+			pageCurrent = pageCount;
+		} else {
+			return;
+		}
+		$(".pagination").data("pageCurrent", pageCurrent);
+		//3.基于新的页码值,重新执行查询操作.
+		doGetObjects();
+	}
+
+	//执行删除操作
+	function doDeleteObjects() {
+		//1.定义请求参数
+		//1.1获得用户选中的记录id,并进行校验
+		var idArray = doGetCheckedIds();
+		//debugger
+		if (idArray.length == 0) {
+			alert("请先选择");
+			return;
+		}
+		//1.2给出删除提示
+		if (!confirm("确认删除吗"))
+			return;
+		//1.3请求参数定义
+		var params = {
+			"ids" : idArray.toString()
+		};//1,2,3
+		//2.定义请求url
+		var url = "log/doDeleteObjects";
+		//3.发送异步请求
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				//doGetObjects();
+				doRefreshAfterDelete();
+			} else {
+				alert(result.message);
+			}
+		})
+	}
+
+	//基于条件查询日志信息
+	function doQueryObjects() {
+		//1.初始化当前页码值
+		$("#pageCurrent").html("1");
+		//2.执行异步查询操作
+		doGetObjects();
+	}
+
+	//异步加载日志记录信息
+	function doGetObjects() {
+		$("#checkAll").prop("checked", false);
+		//1.定义请求参数
+		var pageCurrent = $(".pagination").data("pageCurrent");
+		var pageCount = $(".pagination").data("pageCount");
+		if (!pageCurrent)
+			pageCurrent = 1;
+		var params = {
+			"pageCurrent" : pageCurrent
+		}
+		//当点击查询按钮时,我们还需要向服务端传递一个username参数
+		var uname = $("#searchNameId").val();
+		console.log(uname);
+		if (uname)
+			params.username = uname;
+		//2.定义请求的url
+		var url = "../log/doFindPageObjects";
+		//3.发送异步请求,并处理响应结果
+		$.getJSON(url, params, function(result) {
+			console.log(result);
+			doHandleResponseResult(result);//JsonResult
+		})
+	}
+	//处理响应结果
+	function doHandleResponseResult(result) {
+		if (result.state == 1) {
+			//1.更新日志列表数据
+			doSetTableBodyRows(result.data.records);//list
+			//2.更新分页数据
+			doSetPagination(result.data);//pageObject
+		} else {
+			alert(result.message);
+		}
+	}
+	//初始化页面数据
+	function doSetPagination(pageObject) {
+		//1.初始化记录总数
+		$("#rowCount").html("总记录数(" + pageObject.rowCount + ")")
+		//2.初始化总页数
+		$("#pageCount").html("总页数(" + pageObject.pageCount + ")")
+		//3.初始化当前页
+		$("#pageCurrent").html("当前页(" + pageObject.pageCurrent + ")")
+		//=============
+		//4.存储当前页码值以及总页数
+		//data函数为jquery中的一个值绑定函数
+		//语法:data(key[,value]);
+		$(".pagination").data("pageCurrent", pageObject.pageCurrent);
+		$(".pagination").data("pageCount", pageObject.pageCount);
+		$(".pagination").data("rowCount", pageObject.rowCount);
+	}
+
+	//更新日志列表数据
+	function doSetTableBodyRows(records) {
+		//1. 获取tbody对象并清空其内容
+		var tBody = $(".t_body");
+		tBody.empty();
+		//2.迭代records记录,并将结果追加到tbody
+		for (var i = 0; i < records.length; i++) {
+			//2.1构建tr对象
+			var tr = $("<tr></tr>");
+			//2.2构建tds对象
+			var tds = doCreateTds(records[i]);
+			//2.3将tds追加到tr
+			tr.append(tds);
+			//2.4将tr追加到tbody
+			tBody.append(tr);
+		}
+	}
+	//创建当前行的td对象
+	function doCreateTds(row) {
+		var tds = "<td><input type='checkbox' class='cBox' value='"+row.id+"'></td>"
+				+ "<td class='nl'>"
+				+ row.username
+				+ "</td>"
+				+ "<td class='nl'>"
+				+ row.operation
+				+ "</td>"
+				+ "<td><div class='text-truncate l'>"
+				+ row.method
+				+ "</div></td>"
+				+ "<td><div class='text-truncate l'>"
+				+ row.params
+				+ "</div></td>"
+				+ "<td>"
+				+ row.ip
+				+ "</td>"
+				+ "<td>"
+				+ row.time
+				+ "</td>";
+		return tds;
+	}
+</script>
+
+</html>
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cwfkm.dao.SysUserDao">
+	<!-- 新增用户 -->
+	<insert id="saveUser" parameterType="com.cwfkm.pojo.LogonObject">
+		insert into sys_users
+		(username,password,email,mobile,salt,valid,
+		created_time,modified_time,created_user,modified_user,
+		head_img,sex,sum_exp,role_id)
+		values
+		(#{username},#{password},#{email},#{mobile},#{salt},#{valid},
+		#{createdTime},#{modifiedTime},#{createdUser},#{modifiedUser},
+		#{headImg},#{sex},#{sumExp},#{roleId})
+	</insert>
+
+	<update id="updatePassword">
+		update sys_users
+		set password=#{newHashedPwd},
+		salt=#{newSalt},
+		modified_time=now()
+		where id=#{id}
+	</update>
+	<select id="findUserById" resultType="com.cwfkm.pojo.User">
+		select *
+		from sys_users
+		where id = #{id}
+	</select>
+	<update id="updateObject" parameterType="com.cwfkm.pojo.User">
+		update sys_users
+		set
+		username=#{username},
+		email=#{email},
+		sex=#{sex},
+		mobile=#{mobile}
+		<if test="sumExp != null">
+			<if test="sumExp != 0">
+				,sum_exp=#{sumExp}
+			</if>
+		</if>
+		where id=#{id}
+	</update>
+</mapper>
+
+
+
+
