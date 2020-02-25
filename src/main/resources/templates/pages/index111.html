@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+   
+<meta charset="UTF-8">
+
+   
+<title>Title</title>    
+<script src="/ueditor/ueditor.config.js"></script>
+
+   
+<script src="/ueditor/ueditor.all.min.js"></script>
+
+   
+<script src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+</head>
+
+<body>
+
+	<textarea name="content" id="content" style="min-height: 500px"></textarea>
+	
+	<form action="">
+		<input type="submit" id="WWT_submit">
+	</form>
+	
+</body>
+
+<script type="text/javascript">
+	    UE.getEditor('content');
+</script>
+
+
+
+<script type="text/javascript">
+	var content = UE.getEditor('editor').getContentTxt();
+	alert(content)
+	
+	$(function(){
+		$("#WWT_submit").click(function(){
+			 $.post("do",content);
+		})
+	   
+	})
+	
+</script>
+
+<script type="text/javascript">
+        UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+        UE.Editor.prototype.getActionUrl = function(action) {
+            if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
+                return 'http://localhost:8080/imgUpload';
+                //'http://localhost:8080/imgUpload';为方法imgUpload的访问地址
+            } else {
+                return this._bkGetActionUrl.call(this, action);
+            }
+        }
+        
+</script>
+
+</html>
+

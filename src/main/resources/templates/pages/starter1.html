@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Insert title here</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- bootstrap 4.3.1 -->
+	<link rel="stylesheet"
+		href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+	<!-- jquery-3.2.1 -->
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<!-- popper-1.15.0 动态图--><div class="row">
+	<script
+		src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+	<!-- bootstrap 4.3.1-->
+	<script
+		src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../jquery.qrcode.min.js"></script>
+	<script src="../fonter.js"></script>
+	<style type="text/css">
+	
+@media (min-width : 992px) {
+	/*页眉*/
+	#PAGE_HEADDER{
+		height:100px;
+		width:100%;	
+		background-color: #31393c;
+	}
+	span {
+		cursor: default;
+	}
+	#PAGE_HEADDER {
+		background-color: #31393c;
+		color: #f46f60;
+		height: 102px;
+	}
+	#HECC_LOGO_IN_HEADDER{
+		margin-left: 350px;
+	}
+	#PERSONAL_BUTTOM {
+		background-color: #31393c;
+		border: none;
+		display: inline-block;
+		margin-left:750px;
+		margin-top: 25px;
+	}
+	#PERSONNAL_SINGLE_PIC {
+		width: 50px;
+		height:50px;
+	}
+	/*导航*/
+	#PAGE_TODO_MENU{
+		height:50px;
+		width:100%;	
+		background: #455257;	
+		font-family: SourceHanSansCN-Medium;
+		font-size: 20px;
+		margin-top: 0px;
+	}
+	/*海报*/
+	#PAGE_POSTER{
+		height:666px;
+		width:100%;	
+		background: bisque;		
+	}
+	/*中间部分*/
+	#MAIN_INDEX{
+		height:1445px;
+		width:1178px;	
+		margin:auto;	
+	}
+	/*中间-第一部分*/
+	#PART_ONE_ATC{
+		height:414px;
+		width:1178px;
+		margin-top:20px;
+	}
+	/*第一部分-表格*/
+	#PART_ONE_ATC_FORM{
+		height:414px;
+		width:396px;	
+		float:left;
+		padding-left:5px;
+		background: #222222;
+	}
+	#PART_ONE_ATC_FORM table tr td{
+		width:396px;
+	}
+	.PART_ONE_ART_FROM_0{
+		height:100px; 
+		background-color:black;
+		font:26px '微软雅黑'; 
+		text-indent:4em;
+		background:url("image/jzpaj.png")no-repeat 15px 15px;
+		background-size: 75px 75px;
+		
+	}
+	.PART_ONE_ART_FROM_1{
+		height:78.5px;
+		background:#222222;
+		font:20px '微软雅黑'; 
+		color:gray;
+		background:url("image/jzpaj.png")no-repeat 15px 15px;
+		background-size: 40px 40px;
+		text-indent:4em;
+	}
+	.PART_ONE_ART_FROM_0 a{
+		color:navajowhite;
+	}
+	.PART_ONE_ART_FROM_1 a,
+	.PART_ONE_ART_FROM_1 p{
+		color:gray;	
+		text-indent:4em;
+	}
+	/*第一部分-图片*/
+	#PART_ONE_ATC_PIC{
+		height:414px;
+		width:782px;	
+		display:inline-block;
+		float:right;	
+	}
+	/*中间-第二部分*/
+	#PART_TWO_ATC{
+		height:1000px;
+		width:1178px;
+		margin-top:15px;
+	}
+	/*第二部分-左边*/
+	#PART_TWO_LEFT{
+		height:1000px;
+		width:790px;	
+		float:left;
+	}
+	/*第二部分-表格*/
+	#PART_TWO_ATC_FORM{
+		height:300px;
+		width:784px;	
+		background:#31393C;
+		float:left;
+		color: white;
+		text-indent:1em;
+	}
+	#PART_TWO_ATC_FORM_0{
+		height:70px;
+		font-size:25px;
+	}
+	#PART_TWO_ATC_FORM_1{
+		height:30px;	
+	}
+	#PART_TWO_ATC_FORM_0 a{
+		color:red;
+	}
+	#PART_TWO_ATC_FORM_1 a{
+		color: white;
+	}
+	#PART_TWO_ATC_FORM_1 td{
+		color: #DBDBDB;
+		width:84px;
+	}
+	/*第二部分-图片*/
+	#PART_TWO_ATC_PIC{
+		height:600px;
+		width:784px;	
+		margin-top:10px;
+		float:left;
+		display:inline-block;
+	}
+	#PAGE_MIDDLE_ROW_1,
+	#PAGE_MIDDLE_ROW_2{
+		margin: auto;
+	}
+	#PERSONNAL_CARD {
+	background:white;
+	height:315px;
+	width:388px;
+	margin-top:5px;
+}	
+	/*第二部分-右边*/
+	#PART_TWO_RIGHT{
+		height:1000px;
+		width:388px;	
+		display:inline-block;
+		float:right;
+	}
+	/*第二部分-比赛*/
+	#PART_TWO_ATC_MATCH{
+		height:1000px;
+		width:388px;		
+	}
+	/*尾页部分*/
+	#PAGE_TAILLER{
+		height:450px;
+		width:100%;	
+		background: #31393c;
+		color: white;	
+		margin-top: 10px;		
+	}
+	#PAGE_TAILLER_LINE {
+		display: inline-block;
+		height: 180px;
+		border: 1px white solid;
+		margin-top: 22px;
+	}
+}		
+	</style>
+	</head>
+	<body>
+		<!-- 页眉 -->
+		<div id="PAGE_HEADDER" class="container-fluid">
+			<div class="col-sm-3" style="display: inline-block;">
+				<img id="HECC_LOGO_IN_HEADDER" src="image/0.jpg" width="100" height="100">
+			</div>
+			<button id="PERSONAL_BUTTOM">
+				<img id="PERSONNAL_SINGLE_PIC"
+					src="https://i04piccdn.sogoucdn.com/f7b5ba15a7109783"
+					class="rounded-circle">
+			</button>
+		</div>
+		<!--导航-->
+		<div id="PAGE_TODO_MENU" class="container-md">
+			<nav id="nav_1" class="nav nav-pills nav-fill">
+				<a href="#" class="nav-item nav-link">- 首页 -</a> 
+				<a href="#" id="TO_BOARD_MAP_BUTTON" class="nav-item nav-link" value=""> - 论坛 -</a>
+				<a href="#" id="TO_POST_LIST_PAGE" class="nav-item nav-link" value=""> - 活动区 -</a>
+				<a href="#" id="TO_POST_LIST_PAGE" class="nav-item nav-link" value=""> - 社区公告 -</a>
+				<form class="nav-item nav-link form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="HECC精品搜索" aria-label="全站搜索">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</nav>
+		</div>
+		<!--海报-->
+		<div id="PAGE_POSTER">
+			<div id="HEADER_PIC">
+				<img width="100%" height="666" src="image/poster.png" >
+			</div>
+		</div>		
+		<!--中间部分-->
+		<div id="MAIN_INDEX">
+			<!--中间-第一部分-->
+			<div id="PART_ONE_ATC">
+				<!--第一部分-表格-->
+				<div id="PART_ONE_ATC_FORM">
+					<form action="">
+					    <table>
+					     	<tbody>
+							    <tr class="PART_ONE_ART_FROM_0">
+							       <td>
+							       		<a href="#">《决战！平安夜》手游</a><br/>
+							        	<p style="color:gray">简介......<p/>
+							       </td>
+							    </tr>
+							    <tr class="PART_ONE_ART_FROM_1">
+							      <td>
+							       		<a href="">《决战！平安夜》手游</a>
+							       		<p>简介......<p/>
+							       </td>
+							    </tr>
+							    <tr class="PART_ONE_ART_FROM_1">
+							     	<td>
+							       		<a href="">《决战！平安夜》手游</a>
+							       		<p>简介......<p/>
+							       </td>
+							    </tr>
+							    <tr class="PART_ONE_ART_FROM_1">
+							     	 <td>
+							       		<a href="">《决战！平安夜》手游</a>
+							       		<p>简介......<p/>
+							      	 </td>
+							    </tr>
+							    <tr class="PART_ONE_ART_FROM_1">
+							    	 <td>
+							       		<a href="">《决战！平安夜》手游</a>
+							       		<p>简介......<p/>
+							      	 </td>
+							    </tr>
+					     	</tbody>
+					    </table> 
+		    		 </form>
+				</div>
+				<!--第一部分-图片-->
+				<div id="PART_ONE_ATC_PIC">
+					<img width="782" height="414" src="image/tiaotiaomm.png" >
+				</div>
+			</div>
+			<!--中间-第二部分-->
+			<div id="PART_TWO_ATC">
+				<div id="PART_TWO_LEFT">
+					<!--第二部分表格-->
+					<div id=PART_TWO_ATC_FORM>
+						<form action="">
+						    <table>
+						     	<tbody>
+								    <tr id="PART_TWO_ATC_FORM_0">
+								        <td style="width:784px;"colspan="2">
+								       		<a href="">梅西代言,《实际足球手游-2020》全平台 重磅公测！</a>
+								        </td>
+								    </tr>
+								    <tr id="PART_TWO_ATC_FORM_1" >
+								        <td style="width:700px">
+								       		<a href="#">“命运降临”新卡池规则数学模型分析，内含大量数据！</a>
+								        </td>
+								        <td>12-21</td>
+								    </tr>
+								    <tr id="PART_TWO_ATC_FORM_1">
+								     	<td>
+								       		<a href="">这是一个以“资源置换”和“能力构筑”为核心的肉鸽游戏，这里为大家讲解游戏的各种心得技巧。</a>
+								        </td>
+								        <td>12-21</td>
+								    </tr>
+								    <tr id="PART_TWO_ATC_FORM_1">
+								       <td>
+								       		<a href="">远程/中程输出如何单C通关新手村(意识10)—— 秦王绕柱大法 图文详解。</a>
+								       </td>
+								        <td>12-21</td>
+								    </tr>
+								    <tr id="PART_TWO_ATC_FORM_1">
+								       	<td>
+								       		<a href="">PS4月辰祭——万福之宴新内容汇总。</a>
+								    	</td>
+								        <td>12-21</td>
+								    </tr>
+								     <tr id="PART_TWO_ATC_FORM_1">
+								        <td>
+								       		<a href="">安德罗妮、瓦莉拉上演巅峰对决，来虎牙超级联赛解密酒馆战棋最新玩法！</a>
+								      	</td>
+								        <td>12-20</td>
+								    </tr>
+								    <tr id="PART_TWO_ATC_FORM_1">
+								        <td>
+								       		<a href="">万兆网络YES真香！华硕RT-AX89X万兆WiFi6帝王蟹无线路由器抢鲜尝。</a>
+								      	</td>
+								        <td>12-20</td>
+								    </tr>
+								    <tr id="PART_TWO_ATC_FORM_1">
+								        <td>
+								       		<a href="">第一人称FPS狙击潜入游戏，狙击手感不错，bug较多，狙击/潜入/莽夫都可以，不妨一试。</a>
+								       	</td>
+								        <td>12-19</td>
+								    </tr>
+						     	</tbody>
+						    </table> 
+			    		 </form>
+					</div>
+					<!--第二部分-图片-->
+					<div id=PART_TWO_ATC_PIC>
+						<div id="PAGE_MIDDLE_ROW_1" class="row">
+			     			<div id="PERSONNAL_CARD" class="card" style= float:left;>
+			     				<div id="PART_THREE_1"  align="center">
+						     	 	<img width="350" height="200" class="#" src="image/0.jpg">
+						   		</div> 
+						   		<div class="card-body">
+							        <h4 class="card-title">大话西游手游</h4>
+							        <p class="card-text">level: master
+							        <br> exp: 999/1000<br>
+							        </p>     
+						    	</div>
+						    </div>
+						    <div id="PERSONNAL_CARD" class="card" style= float:right;>
+						    	<div id="PART_THREE_1"  align="center">
+						        	<img width="350" height="200" class="#" src="image/0.jpg">
+						     	</div> 
+						     	<div class="card-body">
+							      <h4 class="card-title">大话西游手游</h4>
+							        <p class="card-text">level: master
+							        <br> exp: 999/1000<br>
+							        </p>
+							    </div>   
+							</div>
+		     			</div>
+		     			<div id="PAGE_MIDDLE_ROW_2" class="row" margin-top:20px>
+		     				<div id="PERSONNAL_CARD" class="card" style= float:left;>
+			     				<div id=pic-three-2  align="center">
+						     	 	<img width="350" height="200" class="#" src="image/0.jpg">
+						   		</div> 
+						   		<div class="card-body">
+							        <h4 class="card-title">大话西游手游</h4>
+						        	<p class="card-text">level: master
+						       			<br> exp: 999/1000<br>
+						        	</p>     
+						    	</div>
+						    </div>
+						    <div id="PERSONNAL_CARD" class="card" style= float:right;>
+						    	<div id=pic-three-2 align="center">
+						        <img width="350" height="200" class="#" src="image/0.jpg">
+						     	</div> 
+						     	<div class="card-body" >
+							        <h4 class="card-title">大话西游手游</h4>
+							        <p class="card-text">level: master
+							        <br> exp: 999/1000<br>
+							        </p>
+							    </div>   
+							</div>
+		     			</div>
+					</div>
+				</div>
+				<div id="PART_TWO_RIGHT">
+					<!--第二部分-比赛-->
+					<div id=PART_TWO_ATC_MATCH>
+						<img width="388" height="1000" src="image/match.png" >
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+	<!--尾页部分-->
+		<div id="PAGE_TAILLER" class="container-fluid"
+		style="text-align: center;">
+			<table style="display: inline-block; vertical-align: top; text-align: left;">
+				<thead style="font-size: 22px;">
+					<tr>
+						<td style="padding: 22px 105px 19px 0px;">关于我们</td>
+						<td style="padding: 22px 105px 19px 0px;">关于我们</td>
+						<td style="padding: 22px 54px 19px 0px;">关于我们</td>
+					</tr>
+				</thead>
+				<tbody style="font-size: 18px;">
+					<tr>
+						<td style="padding: 19px 0px;">组织</td>
+						<td>组织</td>
+						<td>组织</td>
+					</tr>
+					<tr>
+						<td style="padding: 19px 0px;">开发人员</td>
+						<td>开发人员</td>
+						<td>开发人员</td>
+					</tr>
+				</tbody>
+			</table>
+		<div id="PAGE_TAILLER_LINE"></div>
+		<table style="display: inline-block; vertical-align: top; text-align: left;">
+			<tbody>
+				<tr>
+					<td style="padding: 22px 22px; font-size: 22px;">联系我们：</td>
+				</tr>
+				<tr>
+					<td style="padding: 0px 0px 0px 22px; font-size: 44px;">400-1234-1234</td>
+				</tr>
+				<tr>
+					<td style="padding: 0px 22px; font-size: 44px;">400-1234-1234</td>
+				</tr>
+			</tbody>
+		</table>
+		<div style="display: inline-block;">
+			<img src="image/0.jpg" width="100px" height="100px"><br>
+			扫码加微信公众号
+		</div>
+		<div>
+			<img src="image/0.jpg" width="200px" height="200px"><br>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#PAGE_MIDDLE").load("index");
+			doLoadUI("TO_POST_LIST_PAGE", "post/post_list");
+			doLoadUI("TO_BOARD_MAP_BUTTON", "board/doBoardMenu");
+		})
+		function doLoadUI(id, url) {
+			$("#" + id).click(function() {//事件处理函数(回调)
+				//在mainContentId位置,异步请求url对应的资源
+				//服务端响应的数据会插入到mainContentId对应的位置
+				//其中:load函数为jquery中的一个ajax函数
+				$("#PAGE_MIDDLE").load(url);
+			});
+		}
+		
+		
+	</script>
+</body>
+</html>

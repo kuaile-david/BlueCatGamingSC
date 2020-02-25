@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.listBox{
+	position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-bottom: 3px solid #00ffff;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.listBoxBody{
+	height: 400px;
+}
+
+.listBoxBody .postyID{
+	width: 40px；
+}
+
+.listBoxBody .postyName{
+	width: 66%;
+}
+
+tbody .btn{
+	height: 100%;
+	width: 100%;
+	font: text-left;
+}

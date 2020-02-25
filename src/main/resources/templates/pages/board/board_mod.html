@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="row" style="margin: 15px 0px 15px;">
+		<div id="doStarterUI"
+			class="btn btn-info pull_left shadow p-3 mb-5 rounded"
+			style="margin-left: 20px;">BGA</div>
+		<span style="margin-top: 17px;">&emsp;>>&emsp;</span>
+		<div id="doBoard"
+			class="btn btn-info pull_left shadow p-3 mb-5 rounded">论坛</div>
+		<span style="margin-top: 17px;">&emsp;>>&emsp;</span>
+		<div id="boardName" class="btn btn-info pull_left active shadow p-3 mb-5 rounded">[[${mod.name}]]</div>
+		<div class="col-md-8"></div>
+		<div id="doCreatePosty"
+			class="btn btn-info pull_left shadow p-3 mb-5 rounded">发
+			&emsp;帖</div>
+	</div>
+	<script type="text/javascript">
+		$("#doStarterUI").click(function() {
+			$("#MAIN_INDEX").load("doIndex");
+		});
+		$("#doBoard").click(function() {
+			$("#MAIN_INDEX").load("./board/doBoardMenu");
+		});
+		$("#doCreatePosty").click(function() {
+			$("#MAIN_INDEX").load("./board/doCreatePosty?boardId="+[[${mod.id}]]+"&boardName="+$("#boardName").html());
+		});
+	</script>
+	<div>[[${mod.sign}]]</div>
+	<div id="MOD_ID" hidden="true">[[${mod.id}]]</div>
+	<div class="bg-white">
+		<div class=" row" style="padding: 10px 30px;">
+			<div class="col-md-8 text-left" style="margin-top: 15px;">
+				<a>标题</a>
+			</div>
+			<div class="col-md-2" style="margin-top: 15px;">
+				<div>发布者</div>
+			</div>
+			<div class="col-md-2" style="margin-top: 15px;">
+				<div>最近回复</div>
+			</div>
+		</div>
+		<div class="row" th:each="item : ${postys.records}"
+			style="padding: 10px 30px;">
+			<div class="col-md-8 text-left"
+				style="margin-top: 15px; margin-bottom: 15px;">
+				<a th:href="@{/doPostyUI(id=${item.id})}">[[${item.title}]]</a>
+			</div>
+			<div class="col-md-2">
+				<div>[[${item.userName}]]</div>
+				<div>[[${#dates.format(item.createdTime,'yyyy-MM-dd')}]]</div>
+			</div>
+			<div class="col-md-2">
+				<div>[[${item.lastReplyName}]]</div>
+				<div>[[${#dates.format(item.lastReplyTime,'yyyy-MM-dd')}]]</div>
+			</div>
+		</div>
+	</div>
+	<span id="pageCount" hidden="">[[${postys.pageCount}]]</span>
+	<!-- 最大页数 -->
+	<span id="pageCurrent" hidden="">[[${postys.pageCurrent}]]</span>
+	<!-- 当前页数 -->
+	<span id="pageSize" hidden="">[[${postys.pageSize}]]</span>
+	<!-- 一页条目数量 -->
+	<div class="btn-toolbar" role="toolbar"
+		aria-label="Toolbar with button groups" style="margin: 20px 0px;">
+		<div class="btn-group mr-2" role="group" aria-label="Second group">
+			<button id="to_pre_page" type="button" class="btn btn-info">←</button>
+		</div>
+		<div id="MY_PAGE_GROUP" class="btn-group mr-2" role="group" 
+			aria-label="First group"></div>
+		<script type="text/javascript">
+			function doFlashPageButton(startPage) {
+				$("#MY_PAGE_GROUP").html("");
+
+				for (let i = 0; i < 10; i++) {
+					if (startPage > $('#pageCount').html() - 0) {
+						alert("页面不存在");
+						break;
+					} else if (startPage + i > $('#pageCount').html() - 0)
+						break;
+					else if (startPage + i <= 0)
+						continue;
+					else {
+						var btnid = "id='PAGE_BTN_" + Math.random() + "' ";
+						if ($("#pageCurrent").html() == (startPage + i))
+							$("#MY_PAGE_GROUP").append(
+									'<button '+btnid+'type="button" class="btn btn-info active" >'
+											+ (startPage + i) + '</button>');
+						else
+							$("#MY_PAGE_GROUP").append(
+									'<button '+btnid+'type="button" class="btn btn-info">'
+											+ (startPage + i) + '</button>');
+					}
+				}
+				$("#MY_PAGE_GROUP button").on("click", doBindBtn);
+			}
+			function doFindBeginFlash() {
+				var m = $("#pageCurrent").html();
+
+				if (m < 10)
+					doFlashPageButton(1);
+				else if ($("#pageCount").html() < $("#pageSize").html())
+					doFlashPageButton(1);
+				else if (m > $("#pageCount").html() - 10)
+					doFlashPageButton($("#pageCount").html()
+							- $("#pageSize").html());
+				else
+					doFlashPageButton($("#pageCurrent").html());
+			}
+			function doBindBtn() {
+				var n = $(this).html();
+				if (n != $("#pageCurrent").html()) {
+					$("#pageCurrent").html(n);
+					$("#MAIN_INDEX").load(
+							"board/doBoardUI?id=" + $("#MOD_ID").html()
+									+ "&pageCurrent=" + n);
+					doFindBeginFlash();
+				}
+			}
+			doFindBeginFlash()
+		</script>
+		<script type="text/javascript">
+			$("#to_pre_page").click(
+					function() {
+						var n = $("#pageCurrent").html();
+						if (n - 1 < 1) {
+							$("#pageCurrent").html(n);
+						} else {
+							$("#pageCurrent").html(n - 1);
+							$("#MAIN_INDEX").load(
+									"board/doBoardUI?id=" + $("#MOD_ID").html()
+											+ "&pageCurrent=" + (n - 1));
+							doFindBeginFlash();
+						}
+						;
+					})
+		</script>
+		<div class="btn-group" role="group" aria-label="Third group">
+			<button id="to_next_page" type="button" class="btn btn-info">→</button>
+		</div>
+		<script type="text/javascript">
+			$("#to_next_page").click(
+					function() {
+						var n = $("#pageCurrent").html() - 0;
+						var max = $("#pageCount").html();
+						if (n > max - 1) {
+						} else {
+							n = n + 1;
+							$("#MAIN_INDEX").load(
+									"board/doBoardUI?id=" + $("#MOD_ID").html()
+											+ "&pageCurrent=" + n);
+						}
+						;
+						doFindBeginFlash();
+					});
+		</script>
+	</div>
+</body>
+</html>
+
+
+
+

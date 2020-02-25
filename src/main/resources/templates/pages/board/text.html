@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>wangEditor 菜单和编辑器区域分离</title>
+		
+		<style type="text/css">
+			.toolbar {
+				border: 1px solid #ccc;
+			}
+
+			.text {
+				border: 1px solid #ccc;
+				height: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1" class="toolbar">
+		</div>
+		
+		
+		<div id="div2" class="text">
+		</div>
+		
+		<button id="btn1">获取html</button>
+		<button id="btn2">获取text</button>
+		
+		<script type="text/javascript" src="C:\Users\Administrator.PC-20190821ICDB\Desktop\12.20第一次整合\cwfkm-1.00\src\main\resources\templates\pages\board\wangEditor.min.js"></script>
+		<script type="text/javascript">
+			var E = window.wangEditor
+			var editor = new E('#div1','#div2') // 两个参数也可以传入 elem 对象，class 选择器
+
+			// 自定义菜单配置
+			editor.customConfig.menus = 
+					[
+						'bold', // 粗体
+						'fontSize', // 字号
+						'fontName', // 字体
+						'underline', // 下划线
+						'emoticon', // 表情
+						'image', // 插入图片
+					]
+					editor.create()
+					
+			    document.getElementById('btn1').addEventListener('click', function () {
+			        // 读取 html
+			        alert(editor.txt.html())
+			    }, false)
+			
+			    document.getElementById('btn2').addEventListener('click', function () {
+			        // 读取 text
+			        alert(editor.txt.text())
+			    }, false)
+				
+				
+				    editor.customConfig.emotions = [
+				        {
+				            // tab 的标题
+				            title: '默认',
+				            // type -> 'emoji' / 'image'
+				            type: 'image',
+				            // content -> 数组
+				            content: [
+				                {
+				                    alt: '[坏笑]',
+				                    src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png'
+				                },
+				                {
+				                    alt: '[舔屏]',
+				                    src: 'http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png'
+				                },
+								{
+									alt : '[熊猫]',
+									src : 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif'
+								},
+				            ]
+				        },
+				        {
+				            // tab 的标题
+				            title: 'emoji',
+				            // type -> 'emoji' / 'image'
+				            type: 'emoji',
+				            // content -> 数组
+				            content: ['😀', '😃', '😄', '😁', '😆']
+				        }
+				    ]
+					
+		</script>
+	</body>
+</html>

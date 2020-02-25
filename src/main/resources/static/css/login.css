@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+body {
+	background-image: url("/image/heart.jpg");
+	background-color: rgba(252, 157, 154, 0.5);
+}
+/* 头 */
+.container-md {
+	background-color: #343a40;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem
+		1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem
+		rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+	height: 60px;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	z-index: 10;
+	transition: all .2s;
+}
+
+.container-md .dropdown .btn {
+	margin-left border-color: #343a40;
+	background-color: #343a40;
+	height: 58px;
+	line-height: 2.6;
+}
+
+.container-md .mr-sm-2 {
+	margin-left: 200px;
+	width: 300px;
+}
+
+.container-md .nav-item {
+	color: #c0c0c0;
+}
+
+.container-md .nav-item:hover {
+	color: white;
+}
+
+/* 登录窗口 */
+.container {
+	margin-top: 300px;
+	height: 100%;
+	align-content: center;
+}
+
+.logincard {
+	height: 370px;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 400px;
+	background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.card-header h3 {
+	color: white;
+}
+
+.logincard-body {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	padding: 1.25rem;
+}
+
+.input-group-prepend span {
+	width: 50px;
+	background-color: #FFC312;
+	color: black;
+	border: 0 !important;
+}
+
+input:focus {
+	outline: 0 0 0 0 !important;
+	box-shadow: 0 0 0 0 !important;
+}
+
+.input-group-text img {
+	height: 23px;
+	width: 23px;
+}
+
+.remember {
+	color: white;
+}
+
+.remember input {
+	width: 20px;
+	height: 20px;
+	margin-left: 15px;
+	margin-right: 5px;
+}
+
+.login_btn {
+	color: black;
+	background-color: #FFC312;
+	width: 100px;
+}
+
+.login_btn:hover {
+	color: black;
+	background-color: white;
+}
+
+.links {
+	color: white;
+}
+
+.links a {
+	margin-left: 4px;
+}

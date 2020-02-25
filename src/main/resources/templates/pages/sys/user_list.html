@@ -1,0 +1,134 @@
+<div class="row">
+	<div class="container-fluid ">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">用户管理</h3>
+				<hr />
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 350px;">
+						<input type="text" name="table_search" id="searchNameId"
+							class="form-control pull-right" placeholder="用户名">
+
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-search">
+								<i class="fa fa-search"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-add">查询</button>
+							<button type="button" class="btn btn-default btn-update">修改</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="listBoxBody">
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">用户名</th>
+							<th scope="col">等级</th>
+							<th scope="col">手机号</th>
+							<th scope="col">状态</th>
+							<th scope="col">创建时间</th>
+							<th scope="col">修改时间</th>
+							<th scope="col">操作</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyId"></tbody>
+				</table>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link"
+							href="javascript:doPrevPage()">前一页</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							id="pageCurrent">1</a></li>
+						<li class="page-item"><a class="page-link"
+							href="javascript:doNextPage()">下一页</a></li>
+					</ul>
+				</nav>
+				<p id="pageCount" hidden="true"></p>
+				<script type="text/javascript">
+					function doAjax(pageCurrent){
+						$.getJSON("user/doFindAllUser",
+							{"pageCurrent":pageCurrent},
+							function(result){
+								$("#pageCurrent").html(result.data.pageCurrent);
+								$("#pageCount").html(result.data.pageCount);
+								var arr = result.data.records;
+								$("#tbodyId").html("");
+								for(var i=0 ; i<10 ; i++){
+									console.log(arr[i].createdTime);
+									var va = "";
+									if((arr[i].valid-0) == 1)
+										va = "启用";
+									else
+										va = "禁用";
+									$("#tbodyId").append("<tr><th>" + arr[i].id + "</th>" 
+											+ "<td>" + arr[i].username + "</td>"
+											+ "<td>" + arr[i].level + "</td>" 
+											+ "<td>" + arr[i].mobile + "</td>" 
+											+ "<td>" + arr[i].valid + "</td>" 
+											+ "<td>" + (""+arr[i].createdTime).substring(0,10) + "</td>"
+											+ "<td>" + (""+arr[i].modifiedTime).substring(0,10) + "</td>"
+											+ "<td class='btn text-left' style='cursor:pointer;'  id="+ arr[i].id + ">"+ va +"</td></tr>");
+								}
+							}
+						);
+					}
+					function doNextPage(){
+						var n = $("#pageCurrent").html()-0;
+						if(n+1 > $("#pageCount").html()-0)
+							$("#pageCurrent").html(n);
+						else{
+							doAjax(n+1);
+							$("#pageCurrent").html(n+1);
+						}
+					}
+					function doPrevPage(){
+						var n = $("#pageCurrent").html()-0;
+						if(n-1 < 1)
+							$("#pageCurrent").html(n);
+						else{
+							doAjax(n-1);
+							$("#pageCurrent").html(n-1);
+						}
+					}
+					$(doAjax(1));
+					
+					
+					
+					
+					<!--禁用启用-->
+					$(function(){
+						$("tbody").on("click",".btn",doValidById)
+					})
+					
+					function doValidById(){
+						   var btn=$(this);
+						   var id = btn.prop("id");
+						   var valid = btn.html();
+						   var url="user/doValidById";
+						   var params={"id":id,"valid":valid=="禁用"?0:1}
+						   $.post(url,params,function(result){
+							   if(result.state==1){
+								   alert(result.message);
+								var val = btn.html();	
+							    if(val=="禁用"){
+							    	btn.html("启用");
+							    }else{
+							    	btn.html("禁用");
+							   } 
+							   }else{
+								   alert(result.message);
+							   }
+						   })
+					}
+					
+				</script>
+			</div>
+			<div id="pageId" class="box-footer clearfix"></div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
+	</div>
+</div>

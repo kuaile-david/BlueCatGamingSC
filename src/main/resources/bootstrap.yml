@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-service
+      name: web-service
+      profile: dev
+    
+server:
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 100
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
