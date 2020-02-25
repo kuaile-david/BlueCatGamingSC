@@ -1,0 +1,16 @@
+spring: 
+  application:
+    name: zuul
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-service
+      name: zuul
+      profile: dev
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
+      
