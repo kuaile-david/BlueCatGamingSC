@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: config-service
+  profiles:
+    active:
+    - native
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/kuaile-david/BlueCatGamingSC
+          search-paths:
+          - config
+        native:
+          search-locations:
+          - classpath:D:\David_Program\workspace_cwfkm\bga-config
+          - file:D:\David_Program\workspace_cwfkm\bga-config     
+  rabbitmq:
+    host: 192.168.64.140
+    port: 5672
+    username: admin
+    password: admin
+
+server:
+  port: 6001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1:2001/eureka,http://eureka1:2001/eureka
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
